@@ -47,9 +47,10 @@ void TrafficLight::waitForGreen()
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
         if (_queue.receive() == TrafficLightPhase::green)
         {
-            break;
+            return;
         }
     }
+    
 }
 
 TrafficLight::TrafficLightPhase TrafficLight::getCurrentPhase()
@@ -78,11 +79,6 @@ void TrafficLight::cycleThroughPhases()
 
     while (true)
     {
-        // sleep at every iteration to reduce CPU usage
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
-
-        // double cycleDuration = std::rand() % 2 + 4; // Random duration (rand() % rangeSpan + initialRangeValue) in ms
-        
 
         // compute time difference to stop watch
         long timeSinceLastUpdate = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - lastUpdate).count();
@@ -109,5 +105,8 @@ void TrafficLight::cycleThroughPhases()
             lastUpdate = std::chrono::system_clock::now();
             
         }
+
+        // sleep at every iteration to reduce CPU usage
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 }
