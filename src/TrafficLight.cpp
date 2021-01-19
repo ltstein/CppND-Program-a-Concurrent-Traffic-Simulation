@@ -94,11 +94,12 @@ void TrafficLight::cycleThroughPhases()
             if (getCurrentPhase() == TrafficLightPhase::red)
             {
                 _currentPhase = TrafficLightPhase::green;
-                std::cout << "Red to Green" << cycleDuration << std::endl;
+                // std::cout << _id << " Red to Green " << cycleDuration << std::endl;
             }
             else
             {
                 _currentPhase = TrafficLightPhase::red;
+                // std::cout << _id << " Green to Red " << cycleDuration << std::endl;
             }
             
             //Send update to message queue
